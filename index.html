@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
   <head>
     <meta charset='utf-8'>
@@ -55,4 +55,133 @@
 
     
   </body>
+</html>
+
+
+
+ -->
+
+
+
+<!doctype html>
+<!-- The Time Machine GitHub pages theme was designed and developed by Jon Rohan, on Feb 7, 2012. -->
+<!-- Follow him for fun. http://twitter.com/jonrohan. Tail his code on https://github.com/jonrohan -->
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <link rel="stylesheet" href="stylesheets/stylesheet.css" media="screen">
+  <link rel="stylesheet" href="stylesheets/github-dark.css">
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="javascripts/script.js"></script>
+
+  <title>Emulator Project</title>
+  <meta name="description" content="">
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <header>
+      <h1 class="title">Emulator Project</h1>
+    </header>
+    <div id="container">
+      <p class="tagline"></p>
+      <div id="main" role="main">
+        <div class="download-bar">
+        <div class="inner">
+          <a href="https://github.com/tah20112/Assembler_Project" class="code">View our project on GitHub</a>
+        </div>
+        <span class="blc"></span><span class="trc"></span>
+        </div>
+        <article class="markdown-body">
+          <h3>
+
+
+<a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Abstract</h3>
+<p>In this project, we explored the interaction between software and hardware, specifically as it related to executing code on a single-cycle CPU. To do this, we wrote a simple assembler and emulator. An assembler takes in human-language instructions and outputs machine instructions (1s and 0s), while an emulated hardware executes the machine instructions in the same way a physical CPU would. Together, the assembler and emulated hardware make up a full emulator.
+</p>
+
+<a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Background</h3>
+<p>Machine code is binary code that can be executed directly by the CPU. Object code is a portion of machine code that hasn't yet been linked into a complete program. It's the machine code for one particular library or module that will make up the completed product. It may also contain placeholders or offsets not found in the machine code of a completed program that the linker will use to connect everything together. Assembly code is plain-text and is more human friendly source code that has a mostly direct one-to-one correspondence with machine instructions.</p>
+
+<h3>
+<a id="designer-templates" class="anchor" href="#designer-templates" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Our Interests</h3>
+
+<p> Over the course of this class, we have built a CPU and the lower-level modules needed to run a CPU, all in Verilog, a hardware description language which allows us to write at an extremely low level. We were interested in implementing an assembler using C, a language none of us were comfortable with, to assemble the set of MIPS instructions, which we’d learned about in class. We wanted to see exactly how the translation between assembly and machine code could be carried out and how the resulting machine code interacts with the single-cycle CPU we built in the past. We also wanted to write an emulator to execute the instructions in the same way the CPU might, to learn more about how emulators work and for possible future use in Computer Architecture. Our stretch goals consisted of outputting hazard warnings, so that when the emulator assembles the code, it would warn the user if there were any potential hazards during compilation. This would have been an interesting learning opportunity for us because we were largely unfamiliar with pipeline CPU hazards in terms of implementation. We were unable to complete our stretch goal due to lack of time, but we would implement it in the future if we return to this project. Overall, we feel as though we were able to gain even greater understanding of the different levels of computer architecture, and how it relates to us as software engineers.</p>
+
+
+
+
+<a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>The Assembler</h3>
+
+<p>We wrote an assembler in using C to assemble (translate into machine instructions) a set of MIPS instructions. MIPS is an assembly language, which is a very low-level programming language that allows human-language programming while still translating almost directly to machine instruction. For our assembler, we used a reduced MIPS instruction set. This instruction set supports the following instructions: Load Word, Store Word, Jump, Jump Register, Jump and Link, Branch Not Equal, XOR Immediate, Add, Subtract, and Select Less Than.</p> 
+
+<p>Our assembler takes as input an assembly file with those instructions, which our assembler then converts into 32-bit machine instructions that our emulated hardware can execute. As an example, an assembly input could be “add $t3 $t0 $t1“ and an output could be “0x01095820”. In this case, “add” tells the assembler that this is an add operation, $t3 is the register the result will be stored in, and $t0 and $t1 are the two registers that the data should be added from.</p>
+
+
+<p>After the instructions have been assembled into machine code, they are passed into our emulated hardware to be executed. We did this using a python wrapper file, which takes the machine code from the assembler and passes it into the CPU. Our CPU was written in Verilog, an even lower-level language. Verilog is a hardware description language, which emulates the circuitry and hardware of a computational system. We had created our CPU module in a previous lab for this course, and selected the instructions our system would support based on the instructions our CPU supports. Our CPU takes in machine instructions and executes them, performing operations and updating the registers as commanded. 
+Using our three components (the CPU, Assembler, and wrapper file), we were able to successfully build a system which takes in assembly code, assembles it into machine language, and executes the instructions in our CPU module. This allowed us to gain a deeper understanding of how the translation from programming to physical state changes occurs. </p>
+
+<a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>The Emulator</h3>
+
+
+<p>After the instructions have been assembled into machine code, they are passed into our emulated hardware to be executed. We did this using a python wrapper file, which takes the machine code from the assembler and passes it into the CPU. Our CPU was written in Verilog, an even lower-level language. Verilog is a hardware description language, which emulates the circuitry and hardware of a computational system. We had created our CPU module in a previous lab for this course, and selected the instructions our system would support based on the instructions our CPU supports. Our CPU takes in machine instructions and executes them, performing operations and updating the registers as commanded.</p>
+<p>Using our three components (the CPU, Assembler, and wrapper file), we were able to successfully build a system which takes in assembly code, assembles it into machine language, and executes the instructions in our CPU module. This allowed us to gain a deeper understanding of how the translation from programming to physical state changes occurs. </p>
+
+
+
+
+<h3>
+<a id="creating-pages-manually" class="anchor" href="#creating-pages-manually" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>We did it so you won't have to</h3>
+
+<p>Need a functional low-level assembler/emulator?  <a href="github.com/tah20112/Assembler_Project">Download it from our github!</a> The CPU module we used can also be found <a href="github.com/tah20112/Assembler_Project">here</a>. The README should provide all the information needed to run it. </p>
+<p>Our assembler and emulator are both limited, and could use some expanding. Right now they only support 10 instructions- the same number supported by our CPU module. Feel free to make it better! </p>
+
+<h3>
+<a id="roadblocks" class="anchor" href="#roadblocks" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Roadblocks</h3>
+<p>Here are some of the issues we ran into: </p>
+<ul style="list-style-type:square">
+  <li>Jump instructions are in the form of "j [label]", but they need to move the pointer to a specific instruction at a label. Since we go line-by-line, if we are "jumping forward" in instruction, the label we are jumping to doesn't exist in our memory yet. </li>
+  <li>C doesn't have a way to print binary, so when we needed to use binary printouts to check our work, we had to write our own function.</li>
+  <li>For the jump instructions, we needed a way to store labels we came across along with their instruction number, which is what is passed into the CPU. Since we wrote our assembler in C and C doesn’t support a “dictionary” type of data storage. We ended up using “uthash.h” as a "library file" , which allowed us to use that type of data structure in C. </li>
+  <li>We had a lot of trouble with the data types in C, as none of us really knew C prior to this project. However, we eventually worked past all the data type bugs and learned a lot in the process. </li>
+  <li></li>
+</ul>
+
+
+<h3>
+<a id="authors-and-contributors" class="anchor" href="#authors-and-contributors" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+
+<p>This project and website were created by Anna Buchele (<a href="https://github.com/abuchele" class="user-mention">@abuchele</a>), Zarin Bhuiyan (<a href="https://github.com/zbhuiyan" class="user-mention">@zbhuiyan</a>), and Tom Heale (<a href="https://github.com/tah20112" class="user-mention">@tah20112</a>).</p>
+
+<p>Special thanks to the ....resources </p>
+<h3>
+
+        </article>
+      </div>
+    </div>
+    <footer>
+      <div class="owner">
+
+      <p><a href="https://github.com/zbhuiyan" class="avatar"><img src="https://avatars1.githubusercontent.com/u/10710295?v=3&amp;s=60" width="48" height="48"></a>View <a href="https://github.com/zbhuiyan">zbhuiyan</a> on <a href="https://www.github.com">GitHub</a></p>
+
+      </div>
+      <div class="creds">
+        <small>This page generated using <a href="https://pages.github.com/">GitHub Pages</a><br>theme by <a href="https://twitter.com/jonrohan/">Jon Rohan</a></small>
+      </div>
+    </footer>
+  </div>
+  <div class="current-section">
+    <a href="#top">Scroll to top</a>
+    <a href="https://github.com/zbhuiyan/zbhuiyan.github.io/tarball/master" class="tar">tar</a><a href="https://github.com/zbhuiyan/zbhuiyan.github.io/zipball/master" class="zip">zip</a><a href="" class="code">source code</a>
+    <p class="name"></p>
+  </div>
+
+  
+</body>
 </html>
